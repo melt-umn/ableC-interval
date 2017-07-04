@@ -97,6 +97,19 @@ node {
                  ]
                ])
 
+      // Checkout dependancies
+      checkout([ $class: 'GitSCM',
+                 branches: [[name: '*/develop']],
+                 extensions: [
+                   [ $class: 'RelativeTargetDirectory',
+                     relativeTargetDir: "extensions/ableC-string"],
+                   [ $class: 'CleanCheckout']
+                 ],
+                 userRemoteConfigs: [
+                   [url: 'https://github.com/melt-umn/ableC-string.git']
+                 ]
+               ])
+
       /* env.PATH is the master's path, not the executor's */
       withEnv(env) {
         dir("extensions/${extension_name}") {
