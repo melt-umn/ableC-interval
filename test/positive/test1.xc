@@ -1,10 +1,6 @@
 #include <interval.xh>
 #include <stdio.h>
 
-void print_interval(interval x) {
-  printf("[%f, %f]\n", x.min, x.max);
-}
-
 int main (int argc, char **argv) {
   interval a = intr[0, 10];
   interval b = intr[3, 17];
@@ -15,14 +11,14 @@ int main (int argc, char **argv) {
   interval g = -c;
   interval h = ~d;
 
-  print_interval(a);
-  print_interval(b);
-  print_interval(c);
-  print_interval(d);
-  print_interval(e);
-  print_interval(f);
-  print_interval(g);
-  print_interval(h);
+  printf("a: %s\n", show(a).text);
+  printf("b: %s\n", show(b).text);
+  printf("c: %s\n", show(c).text);
+  printf("d: %s\n", show(d).text);
+  printf("e: %s\n", show(e).text);
+  printf("f: %s\n", show(f).text);
+  printf("g: %s\n", show(g).text);
+  printf("h: %s\n", show(h).text);
 
   if (a != intr[0, 10])
     return 1;

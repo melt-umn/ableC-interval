@@ -9,6 +9,8 @@ imports edu:umn:cs:melt:ableC:abstractsyntax:substitution;
 imports edu:umn:cs:melt:ableC:abstractsyntax:env;
 imports edu:umn:cs:melt:ableC:abstractsyntax:overload as ovrld;
 
+imports edu:umn:cs:melt:exts:ableC:string;
+
 aspect function ovrld:getNegativeOpOverload
 Maybe<(Expr ::= Expr Location)> ::= t::Type env::Decorated Env
 {
@@ -80,6 +82,15 @@ Maybe<(Expr ::= Expr Expr Location)> ::= l::Type r::Type env::Decorated Env
          "edu:umn:cs:melt:exts:ableC:interval:interval",
          "edu:umn:cs:melt:exts:ableC:interval:interval"),
        \ lhs::Expr rhs::Expr loc::Location -> eqInterval(lhs, rhs, location=loc))];
+}
+
+aspect function getShowOverload
+Maybe<(Expr ::= Expr Location)> ::= t::Type env::Decorated Env
+{
+  overloads <-
+    [pair(
+       "edu:umn:cs:melt:exts:ableC:interval:interval",
+       \ e::Expr loc::Location -> showInterval(e, location=loc))];
 }
 
 abstract production newInterval
@@ -168,6 +179,17 @@ top::Expr ::= i1::Expr i2::Expr
     checkIntervalHeaderDef("eq_interval", top.location, top.env);
   local fwrd::Expr =
     directCallExpr(name("eq_interval", location=builtin), foldExpr([i1, i2]), location=builtin);
+  forwards to mkErrorCheck(localErrors, fwrd);
+}
+
+abstract production showInterval
+top::Expr ::= i::Expr
+{
+  propagate substituted;
+  local localErrors::[Message] =
+    checkIntervalHeaderDef("_show_interval", top.location, top.env);
+  local fwrd::Expr =
+    directCallExpr(name("_show_interval", location=builtin), foldExpr([i]), location=builtin);
   forwards to mkErrorCheck(localErrors, fwrd);
 }
 
