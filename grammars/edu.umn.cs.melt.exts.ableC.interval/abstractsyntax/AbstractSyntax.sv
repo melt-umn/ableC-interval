@@ -97,6 +97,8 @@ abstract production newInterval
 top::Expr ::= min::Expr max::Expr
 {
   propagate substituted;
+  top.pp = pp"intr [${min.pp}, ${max.pp}]";
+  
   local localErrors::[Message] =
     checkIntervalHeaderDef("new_interval", top.location, top.env);
   local fwrd::Expr =
@@ -109,6 +111,8 @@ abstract production negInterval
 top::Expr ::= i::Expr
 {
   propagate substituted;
+  top.pp = pp"-(${i.pp})";
+  
   local localErrors::[Message] =
     checkIntervalHeaderDef("neg_interval", top.location, top.env);
   local fwrd::Expr =
@@ -120,6 +124,8 @@ abstract production invInterval
 top::Expr ::= i::Expr
 {
   propagate substituted;
+  top.pp = pp"~(${i.pp})";
+  
   local localErrors::[Message] =
     checkIntervalHeaderDef("inv_interval", top.location, top.env);
   local fwrd::Expr =
@@ -131,6 +137,8 @@ abstract production addInterval
 top::Expr ::= i1::Expr i2::Expr
 {
   propagate substituted;
+  top.pp = pp"(${i1.pp}) + (${i2.pp})";
+  
   local localErrors::[Message] =
     checkIntervalHeaderDef("add_interval", top.location, top.env);
   local fwrd::Expr =
@@ -142,6 +150,8 @@ abstract production subInterval
 top::Expr ::= i1::Expr i2::Expr
 {
   propagate substituted;
+  top.pp = pp"(${i1.pp}) - (${i2.pp})";
+  
   local localErrors::[Message] =
     checkIntervalHeaderDef("sub_interval", top.location, top.env);
   local fwrd::Expr =
@@ -153,6 +163,8 @@ abstract production mulInterval
 top::Expr ::= i1::Expr i2::Expr
 {
   propagate substituted;
+  top.pp = pp"(${i1.pp}) * (${i2.pp})";
+  
   local localErrors::[Message] =
     checkIntervalHeaderDef("mul_interval", top.location, top.env);
   local fwrd::Expr =
@@ -164,6 +176,8 @@ abstract production divInterval
 top::Expr ::= i1::Expr i2::Expr
 {
   propagate substituted;
+  top.pp = pp"(${i1.pp}) / (${i2.pp})";
+  
   local localErrors::[Message] =
     checkIntervalHeaderDef("div_interval", top.location, top.env);
   local fwrd::Expr =
@@ -174,6 +188,8 @@ top::Expr ::= i1::Expr i2::Expr
 abstract production eqInterval
 top::Expr ::= i1::Expr i2::Expr
 {
+  top.pp = pp"(${i1.pp}) == (${i2.pp})";
+
   propagate substituted;
   local localErrors::[Message] =
     checkIntervalHeaderDef("eq_interval", top.location, top.env);
@@ -185,6 +201,8 @@ top::Expr ::= i1::Expr i2::Expr
 abstract production showInterval
 top::Expr ::= i::Expr
 {
+  top.pp = pp"show(${i.pp})";
+
   propagate substituted;
   local localErrors::[Message] =
     checkIntervalHeaderDef("_show_interval", top.location, top.env);
