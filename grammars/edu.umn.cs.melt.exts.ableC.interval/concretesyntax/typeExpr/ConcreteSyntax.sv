@@ -1,4 +1,4 @@
-grammar edu:umn:cs:melt:exts:ableC:interval:concretesyntax;
+grammar edu:umn:cs:melt:exts:ableC:interval:concretesyntax:typeExpr;
 
 imports edu:umn:cs:melt:ableC:concretesyntax;
 imports silver:langutil only ast;
@@ -8,7 +8,7 @@ imports edu:umn:cs:melt:ableC:abstractsyntax:construction;
 imports edu:umn:cs:melt:ableC:abstractsyntax:env;
 --imports edu:umn:cs:melt:ableC:abstractsyntax:debug;
 
-imports edu:umn:cs:melt:exts:ableC:interval;
+import edu:umn:cs:melt:exts:ableC:interval;
 
 marking terminal Interval_t 'interval' lexer classes {Ckeyword};
 
