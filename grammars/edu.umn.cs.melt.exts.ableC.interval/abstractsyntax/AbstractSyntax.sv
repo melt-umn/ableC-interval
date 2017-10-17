@@ -3,11 +3,11 @@ grammar edu:umn:cs:melt:exts:ableC:interval:abstractsyntax;
 imports silver:langutil;
 imports silver:langutil:pp;
 
-imports edu:umn:cs:melt:ableC:abstractsyntax;
+imports edu:umn:cs:melt:ableC:abstractsyntax:host;
 imports edu:umn:cs:melt:ableC:abstractsyntax:construction;
 imports edu:umn:cs:melt:ableC:abstractsyntax:substitution;
 imports edu:umn:cs:melt:ableC:abstractsyntax:env;
-imports edu:umn:cs:melt:ableC:abstractsyntax:overload as ovrld;
+imports edu:umn:cs:melt:ableC:abstractsyntax:overloadable as ovrld;
 
 imports edu:umn:cs:melt:exts:ableC:string;
 
@@ -29,7 +29,7 @@ Maybe<(Expr ::= Expr Location)> ::= t::Type env::Decorated Env
        \ e::Expr loc::Location -> invInterval(e, location=loc))];
 }
 
-aspect function ovrld:getAddOpOverload
+aspect function ovrld:getAddOverload
 Maybe<(Expr ::= Expr Expr Location)> ::= l::Type r::Type env::Decorated Env
 {
   overloads <-
@@ -40,7 +40,7 @@ Maybe<(Expr ::= Expr Expr Location)> ::= l::Type r::Type env::Decorated Env
        \ lhs::Expr rhs::Expr loc::Location -> addInterval(lhs, rhs, location=loc))];
 }
 
-aspect function ovrld:getSubOpOverload
+aspect function ovrld:getSubOverload
 Maybe<(Expr ::= Expr Expr Location)> ::= l::Type r::Type env::Decorated Env
 {
   overloads <-
@@ -51,7 +51,7 @@ Maybe<(Expr ::= Expr Expr Location)> ::= l::Type r::Type env::Decorated Env
        \ lhs::Expr rhs::Expr loc::Location -> subInterval(lhs, rhs, location=loc))];
 }
 
-aspect function ovrld:getMulOpOverload
+aspect function ovrld:getMulOverload
 Maybe<(Expr ::= Expr Expr Location)> ::= l::Type r::Type env::Decorated Env
 {
   overloads <-
@@ -62,7 +62,7 @@ Maybe<(Expr ::= Expr Expr Location)> ::= l::Type r::Type env::Decorated Env
        \ lhs::Expr rhs::Expr loc::Location -> mulInterval(lhs, rhs, location=loc))];
 }
 
-aspect function ovrld:getDivOpOverload
+aspect function ovrld:getDivOverload
 Maybe<(Expr ::= Expr Expr Location)> ::= l::Type r::Type env::Decorated Env
 {
   overloads <-
@@ -73,7 +73,7 @@ Maybe<(Expr ::= Expr Expr Location)> ::= l::Type r::Type env::Decorated Env
        \ lhs::Expr rhs::Expr loc::Location -> divInterval(lhs, rhs, location=loc))];
 }
 
-aspect function ovrld:getEqualsOpOverload
+aspect function ovrld:getEqualsOverload
 Maybe<(Expr ::= Expr Expr Location)> ::= l::Type r::Type env::Decorated Env
 {
   overloads <-
