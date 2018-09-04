@@ -2,5 +2,5 @@
 
 library "github.com/melt-umn/jenkins-lib"
 
-ablec.buildNormalExtension('ableC-halide', ['ableC-string'])
+ablec.buildNormalExtension('ableC-interval', ['ableC-string'])
 
