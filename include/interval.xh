@@ -58,7 +58,7 @@ static bool eq_interval(interval x, interval y) {
   return x.min == y.min && x.max == y.max;
 }
 
-static string _show_interval(interval x) {
+static string show_interval(interval x) {
   return str("[") + x.min + ", " + x.max + "]";
 }
   
