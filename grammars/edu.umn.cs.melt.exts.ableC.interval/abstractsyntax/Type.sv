@@ -6,6 +6,7 @@ abstract production intervalTypeExpr
 top::BaseTypeExpr ::= q::Qualifiers loc::Location
 {
   propagate substituted;
+  top.pp = pp"interval";
   forwards to
     if !null(lookupRefId("edu:umn:cs:melt:exts:ableC:interval:interval", top.env))
     then extTypeExpr(q, intervalType())
