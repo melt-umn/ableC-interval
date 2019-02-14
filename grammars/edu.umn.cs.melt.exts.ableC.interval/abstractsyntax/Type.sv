@@ -45,5 +45,9 @@ top::ExtType ::=
   top.lEqualsProd = just(equalsInterval(_, _, location=_));
   top.rEqualsProd = just(equalsInterval(_, _, location=_));
   -- Overload for != automatically inferred from above
-  top.showProd = just(showInterval(_, location=_));
+  
+  top.showErrors = checkIntervalHeaderDef("show_interval", _, _);
+  top.showProd =
+    \ e::Expr ->
+      directCallExpr(name("show_interval", location=builtin), foldExpr([e]), location=builtin);
 }

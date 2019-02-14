@@ -57,8 +57,9 @@ static bool equals_interval(interval x, interval y) {
   return x.min == y.min && x.max == y.max;
 }
 
+// Convert an interval to a string representation
 static string show_interval(interval x) {
   return str("[") + x.min + ", " + x.max + "]";
 }
-  
+
 #endif

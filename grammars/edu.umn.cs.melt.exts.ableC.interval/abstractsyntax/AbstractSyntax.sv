@@ -154,20 +154,6 @@ top::Expr ::= i1::Expr i2::Expr
   forwards to mkErrorCheck(localErrors, fwrd);
 }
 
-abstract production showInterval
-top::Expr ::= i::Expr
-{
-  propagate substituted;
-  top.pp = pp"show(${i.pp})";
-
-  local localErrors::[Message] =
-    checkIntervalHeaderDef("show_interval", top.location, top.env) ++
-    checkIntervalType(i.typerep, "show", top.location);
-  local fwrd::Expr =
-    directCallExpr(name("show_interval", location=builtin), foldExpr([i]), location=builtin);
-  forwards to mkErrorCheck(localErrors, fwrd);
-}
-
 -- Check the given env for the given function name
 function checkIntervalHeaderDef
 [Message] ::= n::String loc::Location env::Decorated Env
