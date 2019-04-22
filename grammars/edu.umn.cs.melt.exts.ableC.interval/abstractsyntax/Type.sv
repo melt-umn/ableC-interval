@@ -5,7 +5,6 @@ import edu:umn:cs:melt:ableC:abstractsyntax:overloadable;
 abstract production intervalTypeExpr
 top::BaseTypeExpr ::= q::Qualifiers loc::Location
 {
-  propagate substituted;
   top.pp = pp"interval";
   forwards to
     if !null(lookupRefId("edu:umn:cs:melt:exts:ableC:interval:interval", top.env))
@@ -16,7 +15,7 @@ top::BaseTypeExpr ::= q::Qualifiers loc::Location
 abstract production intervalType
 top::ExtType ::= 
 {
-  propagate substituted, canonicalType;
+  propagate canonicalType;
   top.pp = pp"interval";
   -- Translate to a reference to the struct with the refId specified in the header file
   top.host =
