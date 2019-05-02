@@ -5,7 +5,6 @@ imports silver:langutil:pp;
 
 imports edu:umn:cs:melt:ableC:abstractsyntax:host;
 imports edu:umn:cs:melt:ableC:abstractsyntax:construction;
-imports edu:umn:cs:melt:ableC:abstractsyntax:substitution;
 imports edu:umn:cs:melt:ableC:abstractsyntax:env;
 
 imports edu:umn:cs:melt:exts:ableC:string;
@@ -13,7 +12,6 @@ imports edu:umn:cs:melt:exts:ableC:string;
 abstract production newInterval
 top::Expr ::= min::Expr max::Expr
 {
-  propagate substituted;
   top.pp = pp"intr [${min.pp}, ${max.pp}]";
 
   local localErrors::[Message] =
@@ -27,7 +25,6 @@ top::Expr ::= min::Expr max::Expr
 abstract production memberInterval
 top::Expr ::= lhs::Expr deref::Boolean rhs::Name
 {
-  propagate substituted;
   top.pp = parens(ppConcat([lhs.pp, text(if deref then "->" else "."), rhs.pp]));
 
   local localErrors::[Message] =
@@ -54,7 +51,6 @@ top::Expr ::= lhs::Expr deref::Boolean rhs::Name
 abstract production negInterval
 top::Expr ::= i::Expr
 {
-  propagate substituted;
   top.pp = pp"-(${i.pp})";
 
   local localErrors::[Message] =
@@ -68,7 +64,6 @@ top::Expr ::= i::Expr
 abstract production invInterval
 top::Expr ::= i::Expr
 {
-  propagate substituted;
   top.pp = pp"~(${i.pp})";
   
   local localErrors::[Message] =
@@ -82,7 +77,6 @@ top::Expr ::= i::Expr
 abstract production addInterval
 top::Expr ::= i1::Expr i2::Expr
 {
-  propagate substituted;
   top.pp = pp"(${i1.pp}) + (${i2.pp})";
 
   local localErrors::[Message] =
@@ -97,7 +91,6 @@ top::Expr ::= i1::Expr i2::Expr
 abstract production subInterval
 top::Expr ::= i1::Expr i2::Expr
 {
-  propagate substituted;
   top.pp = pp"(${i1.pp}) - (${i2.pp})";
 
   local localErrors::[Message] =
@@ -112,7 +105,6 @@ top::Expr ::= i1::Expr i2::Expr
 abstract production mulInterval
 top::Expr ::= i1::Expr i2::Expr
 {
-  propagate substituted;
   top.pp = pp"(${i1.pp}) * (${i2.pp})";
 
   local localErrors::[Message] =
@@ -127,7 +119,6 @@ top::Expr ::= i1::Expr i2::Expr
 abstract production divInterval
 top::Expr ::= i1::Expr i2::Expr
 {
-  propagate substituted;
   top.pp = pp"(${i1.pp}) / (${i2.pp})";
 
   local localErrors::[Message] =
@@ -142,7 +133,6 @@ top::Expr ::= i1::Expr i2::Expr
 abstract production equalsInterval
 top::Expr ::= i1::Expr i2::Expr
 {
-  propagate substituted;
   top.pp = pp"(${i1.pp}) == (${i2.pp})";
 
   local localErrors::[Message] =
