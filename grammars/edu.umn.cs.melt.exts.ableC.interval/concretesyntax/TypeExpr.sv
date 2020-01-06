@@ -10,7 +10,7 @@ imports edu:umn:cs:melt:ableC:abstractsyntax:env;
 
 imports edu:umn:cs:melt:exts:ableC:interval;
 
-marking terminal Interval_t 'interval' lexer classes {Ckeyword};
+marking terminal Interval_t 'interval' lexer classes {Type, Global};
 
 concrete productions top::TypeSpecifier_c
 | 'interval'
