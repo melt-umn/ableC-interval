@@ -3,7 +3,7 @@
 
 int main (int argc, char **argv) {
   interval a = intr[0, 10];
-  interval b = intr[3, 17];
+  interval b = {3, 17};
   interval c = a + b;
   interval d = a - b;
   interval e = a * b;
@@ -28,11 +28,11 @@ int main (int argc, char **argv) {
     return 3;
   if (e != intr[0, 51])
     return 4;
-  if (f != intr[0.000000, 10/17.0])
+  if (f != (interval){0.000000, 10/17.0})
     return 5;
-  if (g != intr[-27, -3])
+  if (g != (interval){-27, -3})
     return 6;
-  if (h != intr[1/7.0, -1/17.0])
+  if (h != (interval){1/7.0, -1/17.0})
     return 7;
   
   return 0; 
