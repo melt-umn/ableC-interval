@@ -3,7 +3,7 @@
 
 int main (int argc, char **argv) {
   interval a = intr[0, 10];
-  interval b = intr[3, 17];
+  interval b = {3, 17};
   interval c = a + b;
   interval d = a - b;
   interval e = a * b;
