@@ -14,3 +14,4 @@ The standard arithmetic (and equality) operators are overloaded:
 * `i1 == i2`: Interval equality
 
 The `show()` operator introduced by the string extension is also overloaded to create a string representation of an interval.  
+
