@@ -58,8 +58,9 @@ static bool equals_interval(interval x, interval y) {
 }
 
 // Convert an interval to a string representation
-static string show_interval(interval x) {
-  return str("[") + x.min + ", " + x.max + "]";
+static const size_t MAX_INTERVAL_STR_LEN = MAX_DOUBLE_STR_LEN * 2 + 4;
+static size_t show_interval(char *buf, interval x) {
+  return sprintf(buf, "[%g, %g]", x.min, x.max);
 }
 
 #endif

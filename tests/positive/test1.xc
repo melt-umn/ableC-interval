@@ -1,6 +1,8 @@
 #include <interval.xh>
 #include <stdio.h>
 
+allocate_using heap;
+
 int main (int argc, char **argv) {
   interval a = intr[0, 10];
   interval b = {3, 17};

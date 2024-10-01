@@ -1,14 +1,12 @@
 grammar edu:umn:cs:melt:exts:ableC:interval:abstractsyntax;
 
-import edu:umn:cs:melt:ableC:abstractsyntax:overloadable;
-
 abstract production intervalTypeExpr
 top::BaseTypeExpr ::= q::Qualifiers
 {
   top.pp = pp"interval";
   forwards to
     if !null(lookupRefId("edu:umn:cs:melt:exts:ableC:interval:interval", top.env))
-    then extTypeExpr(q, intervalType())
+    then extTypeExpr(@q, intervalType())
     else errorTypeExpr([errFromOrigin(top, "Missing include of interval.xh")]);
 }
 
@@ -46,8 +44,10 @@ top::ExtType ::=
   top.rEqualsProd = just(equalsInterval);
   -- Overload for != automatically inferred from above
   
-  top.showErrors = checkIntervalHeaderDef("show_interval", _);
+  top.showErrors := checkIntervalHeaderDef;
+  top.showMaxLenProd =
+    \ _ -> declRefExpr(name("MAX_INTERVAL_STR_LEN"));
   top.showProd =
-    \ e::Expr ->
-      directCallExpr(name("show_interval"), foldExpr([e]));
+    \ buf::Expr e::Expr ->
+      directCallExpr(name("show_interval"), foldExpr([buf, e]));
 }
