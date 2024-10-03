@@ -22,11 +22,11 @@ top::Expr ::= min::Expr max::Expr
 }
 
 abstract production initInterval implements ObjectInitializer
-top::Initializer ::= @i::InitList
+top::Initializer ::= i::InitList
 {
   top.pp = ppConcat([text("{"), ppImplode(text(", "), i.pps), text("}")]);
 
-  forwards to bindObjectInitializer(i,
+  forwards to bindObjectInitializer(@i,
     case i of
     | consInit(positionalInit(_), consInit(positionalInit(_), nilInit()))
         when i.bindRefExprs matches [min, max] ->
