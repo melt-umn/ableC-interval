@@ -26,7 +26,7 @@
 
 EXT_NAME=ableC-interval
 EXT_GRAMMAR=edu:umn:cs:melt:exts:ableC:interval
-EXT_DEPS=ableC-string ableC-allocation
+EXT_DEPS=ableC-string ableC-allocation ableC-constructor
 
 # Path from current directory to top level ableC repository
 ABLEC_BASE?=../../ableC
