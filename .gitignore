@@ -9,6 +9,7 @@ build*.xml
 generated/
 
 # Other files
+depends.mk
 examples/*.c
 tests/**/*.c
 *.i
