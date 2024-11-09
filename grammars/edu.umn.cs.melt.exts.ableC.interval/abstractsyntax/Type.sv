@@ -28,6 +28,7 @@ top::ExtType ::=
   
   -- Additional equations specify overload productions for the interval type
   top.objectInitProd = just(initInterval);
+  top.compoundLiteralProd = just(compoundLiteralInterval);
   top.memberProd = just(memberInterval);
   top.negativeProd = just(negInterval);
   top.bitNegateProd = just(invInterval);

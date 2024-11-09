@@ -22,15 +22,37 @@ top::Expr ::= min::Expr max::Expr
 }
 
 abstract production initInterval implements ObjectInitializer
-top::Initializer ::= i::InitList
+top::Initializer ::= @i::InitList
 {
-  top.pp = ppConcat([text("{"), ppImplode(text(", "), i.pps), text("}")]);
+  top.pp = forwardParent.pp;
 
-  forwards to bindObjectInitializer(@i,
+  local expectedTypes::[Type] = [
+    builtinType(nilQualifier(), realType(doubleType())),
+    builtinType(nilQualifier(), realType(doubleType()))
+  ];
+
+  forwards to transformObjectInitializer(i, expectedTypes, exprInitializer(
     case i of
-    | consInit(positionalInit(_), consInit(positionalInit(_), nilInit()))
-        when i.bindRefExprs matches [min, max] ->
-      newInterval(min, max)
+    | consInit(positionalInit(min), consInit(positionalInit(max), nilInit())) ->
+        newInterval(min.asExpr, max.asExpr)
+    | _ -> errorExpr([errFromOrigin(top, "Invalid interval initializer")])
+    end));
+}
+
+abstract production compoundLiteralInterval implements CompoundLiteral
+top::Expr ::= @t::TypeName @i::InitList
+{
+  top.pp = forwardParent.pp;
+
+  local expectedTypes::[Type] = [
+    builtinType(nilQualifier(), realType(doubleType())),
+    builtinType(nilQualifier(), realType(doubleType()))
+  ];
+
+  forwards to transformCompoundLiteral(t, i, expectedTypes,
+    case i of
+    | consInit(positionalInit(min), consInit(positionalInit(max), nilInit())) ->
+        newInterval(min.asExpr, max.asExpr)
     | _ -> errorExpr([errFromOrigin(top, "Invalid interval initializer")])
     end);
 }
