@@ -31,4 +31,7 @@ EXT_DEPS=ableC-string ableC-allocation ableC-constructor
 # Path from current directory to top level ableC repository
 ABLEC_BASE?=../../ableC
 
+# Need to bump up the heap space to run the MWDA:
+export SVJVM_FLAGS=-Xmx7G -Xss30m
+
 include $(ABLEC_BASE)/extension.mk
